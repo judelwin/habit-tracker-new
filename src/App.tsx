@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { auth } from './configuration.tsx';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import Signin from './pages/Signin';
+import Home from './pages/Home';
 
-function App() {
+const App: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/signin"
+          element={user ? <Navigate to="/" /> : <Signin />}
+        />
+        <Route
+          path="/"
+          element={user ? <Home user={user} /> : <Navigate to="/signin" />}
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
