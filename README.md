@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Habit Tracker is a web application designed to help users track and manage their habits. It offers multiple authentication methods including Google, email/password, and anonymous sign-in. Users can add, check-in, and delete habits, as well as track their progress. You can access the application [here](https://habits.judelwin.com){:target="_blank"}. 
+The Habit Tracker is a web application designed to help users track and manage their habits. It offers multiple authentication methods including Google, email/password, and anonymous sign-in. Users can add, check-in, and delete habits, as well as track their progress. You can access the application [here](https://habits.judelwin.com). 
 
 ## Features
 
